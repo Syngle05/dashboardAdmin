@@ -20,7 +20,7 @@ function SideBar() {
         <img
           src={logoBh2}
           alt="Logo"
-          className={isExpanded ? "h-20" : "h-12"}
+          className={isExpanded ? "lg:h-[4.5rem] xl:h-20" : "lg:h-10 xl:h-12"}
         />
       </div>
       <div className="border-t border-t-themecolor-800">

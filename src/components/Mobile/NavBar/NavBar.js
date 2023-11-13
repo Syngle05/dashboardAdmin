@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import logoBh2 from "../../img/vecteezy_circle-logo_1191986.png";
+import logoBh2 from "../../../img/vecteezy_circle-logo_1191986.png";
 import { BsList } from "react-icons/bs";
-import SideBarModal from "./SideBarModal";
+import SideBarModal from "../SideBar/SideBarModal";
 
 function NavBar() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -22,7 +22,10 @@ function NavBar() {
 
   const handleScroll = (e) => {
     const currentScrollPos = e.target.scrollTop;
-    const visible = scrollPos > currentScrollPos;
+    const isAtBottom =
+      currentScrollPos >= e.target.scrollHeight - window.innerHeight;
+    const visible =
+      (scrollPos > currentScrollPos || currentScrollPos <= 0) && !isAtBottom;
 
     setScrollPos(currentScrollPos);
     setShowNav(visible);
@@ -33,12 +36,12 @@ function NavBar() {
   }
   return (
     <nav
-      className={`z-50 transition-all duration-[0.8s] py-1 items-center right-0 left-0 bg-themecolor-1000 px-8 flex absolute  ${
+      className={`z-50 transition-all duration-[0.8s]  py-1 items-center right-0 left-0 bg-themecolor-1000 px-8 flex absolute  ${
         showNav ? "top-0 " : "-top-[calc(10vh+0.5rem)]"
-      } h-[calc(10vh+0.5rem)]  justify-between `}
+      } h-[calc(10vh+0.5rem)]  justify-center `}
     >
       <SideBarModal modalIsOpen={isOpenModal} closeModal={closeModal} />
-      <div onClick={() => setIsOpenModal(true)}>
+      <div className="left-2 absolute" onClick={() => setIsOpenModal(true)}>
         {" "}
         <BsList className="text-secondColor-900 text-3xl" />
       </div>

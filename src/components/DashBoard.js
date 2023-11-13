@@ -1,5 +1,5 @@
 import useSideBarContext from "../hooks/useSideBarContext";
-import NavBar from "./Mobile/NavBar";
+import NavBar from "./Mobile/NavBar/NavBar";
 import SideBar from "./SideBar";
 import { useMediaQuery } from "react-responsive";
 

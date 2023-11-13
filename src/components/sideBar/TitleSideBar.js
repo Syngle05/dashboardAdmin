@@ -23,7 +23,7 @@ function TitleSideBar({ text, name, icon }) {
         <BsBuildings
           className={`${
             !isExpanded ? "mx-0 mt-[1.2rem]" : "mx-[0.4rem]"
-          } transition-all text-[1.4rem]  ${
+          } transition-all xl:text-[1.4rem] lg:text-[1.275rem]  ${
             name === titleState
               ? " text-secondColor-500 "
               : "text-themecolor-400"
@@ -32,7 +32,7 @@ function TitleSideBar({ text, name, icon }) {
       )}
       {isExpanded && (
         <h3
-          className={`  w-full p-[0.4rem] mx-0 font-medium pl-0 my-2 transition-all  ${
+          className={`  w-full p-[0.4rem] lg:text-sm xl:text-base mx-0 font-medium pl-0 my-2 transition-all  ${
             name === titleState
               ? " text-secondColor-500 "
               : "text-themecolor-400"

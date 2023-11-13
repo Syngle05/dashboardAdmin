@@ -42,26 +42,26 @@ function ModalDetailOrderAdmin({
             <div className="flex justify-center">
               <div className="max-w-[70%]">
                 <div className="text-center border-b border-b-[#424242] pb-2">
-                  <h1 className=" text-themecolor-50 text-2xl font-bold ">
+                  <h1 className=" text-themecolor-50 lg:text-xl xl:text-2xl font-bold ">
                     {order.Customer.company}
                   </h1>
                 </div>
               </div>
             </div>
             <div className=" pl-[15px] pt-7 flex flex-col">
-              <p className=" text-sm text-themecolor-100">
+              <p className=" lg:text-xs xl:text-sm text-themecolor-100">
                 Data da criação do agendamento
               </p>
-              <span className="pl-1 text-sm text-themecolor-400">
+              <span className="pl-1 lg:text-xs xl:text-sm text-themecolor-400">
                 Dia: {formatedUTCDate(inviteeData?.resource.created_at)}
               </span>
-              <span className="pl-1 text-sm text-themecolor-400">
+              <span className="pl-1 lg:text-xs xl:text-sm text-themecolor-400">
                 Hora: {formatedUTCTime(inviteeData?.resource.created_at)}
               </span>
-              <p className=" pt-2 text-sm text-themecolor-100">
+              <p className=" pt-2 lg:text-xs xl:text-sm text-themecolor-100">
                 Status do agendamento no Calendly
               </p>
-              <span className="pl-1 text-sm text-themecolor-400">
+              <span className="pl-1 lg:text-xs xl:text-sm text-themecolor-400">
                 {inviteeData?.resource.status}
               </span>
             </div>
@@ -70,21 +70,23 @@ function ModalDetailOrderAdmin({
           <div className=" w-[70%]  ">
             <div className="w-full flex  justify-end">
               <button
-                className=" text-secondColor-400 text-[20px] mr-2 flex justify-start "
+                className=" text-secondColor-400 lg:text-lg xl:text-[20px] mr-2 flex justify-start "
                 onClick={fecharModal}
               >
                 Fechar
               </button>
             </div>
-            <div className="flex w-fullgap-2">
+            <div className="flex w-full lg:text-[0.813rem] xl:text-base gap-2">
               <div className="w-[50%] border-r border-r-themecolor-800">
                 <div className="pl-2">
-                  <p className="text-lg text-secondColor-100">
+                  <p className="lg:text-base xl:text-lg text-secondColor-100">
                     Informações do agendamento
                   </p>
                   <div className="flex flex-col pl-4 pt-2">
-                    <p className=" text-themecolor-100">Dia do agendamento</p>
-                    <span className="pl-1  text-themecolor-400">
+                    <p className=" lg:text-sm xl:text-base text-themecolor-100">
+                      Dia do agendamento
+                    </p>
+                    <span className="pl-1 lg:text-sm xl:text-base  text-themecolor-400">
                       {order.schedulingDate}
                     </span>
                     <p className=" text-themecolor-100">
@@ -96,7 +98,7 @@ function ModalDetailOrderAdmin({
                   </div>
                 </div>
                 <div className="pl-2 pt-6">
-                  <p className="text-lg text-secondColor-100">
+                  <p className="lg:text-base xl:text-lg text-secondColor-100">
                     Informações do Produto
                   </p>
                   <div className="flex flex-col pl-4 pt-2">
@@ -127,7 +129,7 @@ function ModalDetailOrderAdmin({
               </div>
               <div className="w-1/2">
                 <div className="pl-2 ">
-                  <p className="text-lg text-secondColor-100">
+                  <p className="lg:text-base xl:text-lg text-secondColor-100">
                     Informações do Cliente
                   </p>
                   <div className="flex flex-col pl-4 pt-2">
@@ -157,7 +159,7 @@ function ModalDetailOrderAdmin({
                   </div>
                 </div>
                 <div className="pl-2 pt-5">
-                  <p className="text-lg text-secondColor-100">
+                  <p className="lg:text-base xl:text-lg text-secondColor-100">
                     Informações do Contador
                   </p>
                   <div className="flex flex-col pl-4 pt-2">

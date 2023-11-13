@@ -6,7 +6,7 @@ function LineSideBar({ name, text, to }) {
 
   return (
     <div
-      className={`p-[0.4rem] pl-[2.4rem] w-full text-[0.875rem] font-semibold ${
+      className={`p-[0.4rem] pl-[2.4rem] w-full text-xs lg:text-xs xl:text-[0.875rem] font-semibold ${
         name === lineState && " bg-secondColor-700"
       }`}
     >
