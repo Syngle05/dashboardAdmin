@@ -9,41 +9,6 @@ function CardOrderAdmin({ order }) {
   useEffect(() => {
     loadCalendly();
   }, []);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [inviteeData, setInviteeData] = useState();
-  const [eventData, setEventData] = useState();
-  const [selectedValue, setSelectedValue] = useState(null);
-  function fecharModal() {
-    setIsOpen(false);
-  }
-  function abrirModal() {
-    setIsOpen(true);
-  }
-
-  function loadCalendly() {
-    fetch(order.inviteeUri, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${personalAccessToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setInviteeData(data));
-    fetch(order.eventUri, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${personalAccessToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setEventData(data));
-  }
-
-  function handleSelectStatus(status) {
-    setSelectedValue(status);
-    editStatus(status.value, order.id);
-  }
-
   const optionsSelect = [
     {
       value: "Solicitado",
@@ -94,6 +59,46 @@ function CardOrderAdmin({ order }) {
       hoverColor: "#B2FF59",
     },
   ];
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [inviteeData, setInviteeData] = useState();
+  const [eventData, setEventData] = useState();
+  const [selectedValue, setSelectedValue] = useState(
+    optionsSelect.find(
+      (option) =>
+        option.value ===
+        (order.status === "solicitado" ? "Solicitado" : order.status)
+    )
+  );
+  function fecharModal() {
+    setIsOpen(false);
+  }
+  function abrirModal() {
+    setIsOpen(true);
+  }
+
+  function loadCalendly() {
+    fetch(order.inviteeUri, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${personalAccessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setInviteeData(data));
+    fetch(order.eventUri, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${personalAccessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setEventData(data));
+  }
+
+  function handleSelectStatus(status) {
+    setSelectedValue(status);
+    editStatus(status.value, order.id);
+  }
 
   const IndicatorSeparator = () => null;
   const DropdownIndicator = (props) => {
@@ -174,6 +179,7 @@ function CardOrderAdmin({ order }) {
         <Select
           options={optionsSelect}
           onChange={handleSelectStatus}
+          defaultValue={selectedValue}
           placeholder="Selecione..."
           components={{
             IndicatorSeparator,

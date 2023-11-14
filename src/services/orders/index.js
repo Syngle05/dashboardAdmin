@@ -1,11 +1,11 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://api.eplataforma.com.br",
 });
 
 api.interceptors.request.use(async (config) => {
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNjk2ODc4MTQ3LCJleHAiOjE2OTk0NzAxNDd9.evbc5ooAv_yItjzDsgLKm0tc9U7rh_OUUQnGc_LnNYk";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYnJ1bm9tcGVAZ21haWwuY29tIiwibmFtZSI6IkJydW5vIE1pcmFuZGEgUGVyZWlyYSIsImlhdCI6MTY5OTg4NDUxMSwiZXhwIjoxNzAyNDc2NTExfQ.nKyEQzUELCe0TiqiGmgGc6ZOS8Jr280WNpbm4mDwhS0";
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

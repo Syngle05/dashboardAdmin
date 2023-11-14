@@ -21,8 +21,12 @@ function Orders() {
 
   async function loadOrders() {
     const data = await getAllOrders();
+    if (data.length > 0) {
+      data.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+    }
     setOrders(data);
-
     setLoading(false);
   }
 
