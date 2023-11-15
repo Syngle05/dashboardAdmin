@@ -2,6 +2,7 @@
   "name": "admin-dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Syngle05.github.io/dashboardAdmin",
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
     "cross-env": "^7.0.3",
+    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
@@ -26,6 +28,8 @@
   },
   "scripts": {
     "start": "cross-env HOST=0.0.0.0 react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
