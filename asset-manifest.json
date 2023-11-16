@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/dashboardAdmin/static/css/main.0a02496f.css",
-    "main.js": "/dashboardAdmin/static/js/main.3a7c2549.js",
+    "main.js": "/dashboardAdmin/static/js/main.21dec868.js",
     "static/media/vecteezy_circle-logo_1191986.png": "/dashboardAdmin/static/media/vecteezy_circle-logo_1191986.2b7a66e6119ca42f42f7.png",
     "index.html": "/dashboardAdmin/index.html",
     "main.0a02496f.css.map": "/dashboardAdmin/static/css/main.0a02496f.css.map",
-    "main.3a7c2549.js.map": "/dashboardAdmin/static/js/main.3a7c2549.js.map"
+    "main.21dec868.js.map": "/dashboardAdmin/static/js/main.21dec868.js.map"
   },
   "entrypoints": [
     "static/css/main.0a02496f.css",
-    "static/js/main.3a7c2549.js"
+    "static/js/main.21dec868.js"
   ]
 }
