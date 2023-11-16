@@ -1,4 +1,4 @@
-import { Route, HashRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "./context/AuthProvider/AuthProvider";
@@ -8,7 +8,7 @@ import DashboardLayout from "./routes/DashBoardRoutes";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/dashboardAdmin">
       <ToastContainer />
       <AuthProvider>
         <SideBarProvider>
