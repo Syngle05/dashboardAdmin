@@ -3,7 +3,10 @@ import ModalDetailOrderAdmin from "./ModalDetailOrderAdmin";
 import Select, { components } from "react-select";
 import { editStatus } from "../../services/orders";
 import TooltipComponent from "../TooltipComponent";
-function CardOrderAdmin({ order }) {
+import { updateOrderFireBase } from "../../services/FireBase";
+function CardOrderAdmin({ order, isPaid }) {
+  const [isPaidValue, setIsPaidValue] = useState(isPaid.isPaid);
+
   const personalAccessToken =
     "eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNjkwMjIxNTA5LCJqdGkiOiI0YTNlNmNkMC04YTYwLTRhZjctYmM2Yi1iMDQ3ZTc0NzBjODciLCJ1c2VyX3V1aWQiOiIyNzY2MDJmYS1mZDBhLTQ5YTgtYWRlOS0zNGQ5MDA3MDM3MGQifQ.aBj3lv0O_ZIFjxpEFr-I3_OXewRWNwbGPTEEtyhCH0fl0ICwk4Co1Y8_KrEbiTNZIRl8NAKmyl_ZE0MPtbeosA";
   useEffect(() => {
@@ -100,6 +103,11 @@ function CardOrderAdmin({ order }) {
     editStatus(status.value, order.id);
   }
 
+  function handleIsPaid(e) {
+    setIsPaidValue(e.target.checked);
+    updateOrderFireBase(isPaid.id, e.target.checked);
+  }
+
   const IndicatorSeparator = () => null;
   const DropdownIndicator = (props) => {
     return (
@@ -108,6 +116,7 @@ function CardOrderAdmin({ order }) {
       </components.DropdownIndicator>
     );
   };
+
   const SingleValue = ({ children, ...props }) => (
     <components.SingleValue {...props}>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -265,6 +274,8 @@ function CardOrderAdmin({ order }) {
         <input
           onClick={(e) => e.stopPropagation()}
           type="checkbox"
+          checked={isPaidValue}
+          onChange={handleIsPaid}
           className=" lg:h-4 lg:w-4 xl:h-5 xl:w-5 accent-secondColor-300"
           name="payment"
         />

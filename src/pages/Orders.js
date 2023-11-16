@@ -7,13 +7,18 @@ import CardOrderAdmin from "../components/orders/CardOrderAdmin";
 import TooltipComponent from "../components/TooltipComponent";
 import { useMediaQuery } from "react-responsive";
 import OrdersMobile from "../components/Mobile/Orders/OrdersMobile";
+import {
+  createOrderFirebase,
+  getOrdersFirebase,
+  removeOrderFirebase,
+} from "../services/FireBase";
 
 function Orders() {
   const [orders, setOrders] = useState();
   const [loading, setLoading] = useState(true);
   const [spin, setSpin] = useState(false);
   const [key, setKey] = useState(0);
-
+  const [orderFirebase, setOrderFirebase] = useState();
   const mobile = useMediaQuery({ query: "(max-width: 640px)" });
   useEffect(() => {
     loadOrders();
@@ -21,11 +26,39 @@ function Orders() {
 
   async function loadOrders() {
     const data = await getAllOrders();
+
     if (data.length > 0) {
       data.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
     }
+
+    const dataOrders = await getOrdersFirebase();
+
+    data.forEach((order) => {
+      const existsInFirebase = dataOrders.some(
+        (firebaseOrder) => firebaseOrder.IdOrder === order.id
+      );
+
+      // Se o pedido não existir no Firebase, adicione-o
+      if (!existsInFirebase) {
+        createOrderFirebase(order.id);
+      }
+    });
+
+    dataOrders.forEach((firebaseOrder) => {
+      const existsInData = data.some(
+        (order) => order.id === firebaseOrder.IdOrder
+      );
+
+      // Se o pedido não existir mais no array de pedidos, remova-o do Firebase
+      if (!existsInData) {
+        removeOrderFirebase(firebaseOrder.id);
+      }
+    });
+
+    setOrderFirebase(dataOrders);
+
     setOrders(data);
     setLoading(false);
   }
@@ -116,7 +149,7 @@ function Orders() {
         </div>{" "}
       </div>
       <div className="rounded-md p-3 mt-6 bg-themecolor-900 text-themecolor-400">
-        {mobile && <OrdersMobile orders={orders} />}
+        {mobile && <OrdersMobile orders={orders} isPaid={orderFirebase} />}
         {!mobile && (
           <>
             <div>
@@ -211,7 +244,13 @@ function Orders() {
             <div className="w-full xl:text-sm lg:text-[0.625rem] ">
               {orders?.length > 0 ? (
                 orders.map((order) => (
-                  <CardOrderAdmin key={order.id} order={order} />
+                  <CardOrderAdmin
+                    key={order.id}
+                    order={order}
+                    isPaid={orderFirebase.find(
+                      (orderFireBase) => orderFireBase.IdOrder === order.id
+                    )}
+                  />
                 ))
               ) : (
                 <p>Não possui pedidos</p>

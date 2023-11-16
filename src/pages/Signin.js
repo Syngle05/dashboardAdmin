@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "../services/FireBase";
+import ReactLoading from "react-loading";
 
 function Signin() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ function Signin() {
   const [passwoard, setPasswoard] = useState(undefined);
   const [errorPasswoard, setErrorPasswoard] = useState();
   const [isPasswoardText, setIsPasswoardText] = useState();
+  const [loadingButton, setLoadingButton] = useState(false);
 
   function handleChangeUser(e) {
     setUser(e.target.value.toLowerCase());
@@ -44,13 +47,18 @@ function Signin() {
     }
   }
 
-  function submitPasswoard(e) {
-    console.log(passwoard);
+  async function submitPasswoard(e) {
+    setLoadingButton(true);
     if (passwoard === "Admin@123") {
-      localStorage.setItem("token", "token_backend");
+      const data = await getToken();
+
+      localStorage.setItem("token", data[0].tokenDefault);
       setErrorPasswoard(undefined);
+      setLoadingButton(false);
+
       navigate("/");
     } else {
+      setLoadingButton(false);
       setErrorPasswoard("Senha incorreto");
     }
   }
@@ -104,16 +112,25 @@ function Signin() {
             {viewPasswoard && (
               <button
                 onClick={submitPasswoard}
-                disabled={viewPasswoard}
+                disabled={!viewPasswoard}
                 className=" flex items-center absolute right-4"
               >
-                <BsArrowRightCircle
-                  className={`text-2xl ${
-                    isPasswoardText
-                      ? "text-themecolor-500"
-                      : "text-themecolor-700 "
-                  }`}
-                />
+                {!loadingButton ? (
+                  <BsArrowRightCircle
+                    className={`text-2xl ${
+                      isPasswoardText
+                        ? "text-themecolor-500"
+                        : "text-themecolor-700 "
+                    }`}
+                  />
+                ) : (
+                  <ReactLoading
+                    type="spin"
+                    color="#29B6F6"
+                    height={24}
+                    width={24}
+                  />
+                )}
               </button>
             )}
             <input

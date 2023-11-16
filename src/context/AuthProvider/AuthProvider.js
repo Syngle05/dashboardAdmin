@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import { useState } from "react";
 import { useEffect } from "react";
+import { getToken } from "../../services/FireBase";
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
@@ -10,12 +11,20 @@ function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
+    const fetchData = async () => {
+      const data = await getToken();
 
-    if (!storedToken && !["/signin"].includes(location.pathname)) {
-      navigate("/signin");
-    }
-    setToken(storedToken);
+      const storedToken = localStorage.getItem("token");
+
+      if (
+        !(storedToken === data[0].tokenDefault) &&
+        !["/signin"].includes(location.pathname)
+      ) {
+        navigate("/signin");
+      }
+      setToken(storedToken);
+    };
+    fetchData();
   }, [localStorage.getItem("token")]);
 
   const login = (newToken) => {

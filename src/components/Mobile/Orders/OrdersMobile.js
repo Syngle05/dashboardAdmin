@@ -2,7 +2,7 @@ import React from "react";
 import CardOrderMobile from "./CardOrderMobile";
 import OrderMobileProvider from "../../../context/orderMobileContext/OrderMobileProvider";
 
-function OrdersMobile({ orders }) {
+function OrdersMobile({ orders, isPaid }) {
   return (
     <>
       <div>
@@ -30,7 +30,13 @@ function OrdersMobile({ orders }) {
         <OrderMobileProvider>
           {orders?.length > 0 ? (
             orders.map((order) => (
-              <CardOrderMobile key={order.id} order={order} />
+              <CardOrderMobile
+                key={order.id}
+                order={order}
+                isPaid={isPaid.find(
+                  (orderFireBase) => orderFireBase.IdOrder === order.id
+                )}
+              />
             ))
           ) : (
             <p>Não possui pedidos</p>
