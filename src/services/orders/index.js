@@ -2,7 +2,7 @@ import axios from "axios";
 const api = axios.create({
   baseURL: "https://api.eplataforma.com.br",
 });
-
+// tes
 api.interceptors.request.use(async (config) => {
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNzA2ODgwMzUwLCJleHAiOjE3MDk0NzIzNTB9.Ia5pE41d3jGwoI8_-S_AnqPooUSFqO8mKtiwPxDPEl4";
