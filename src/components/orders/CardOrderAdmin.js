@@ -50,8 +50,8 @@ function CardOrderAdmin({ order, isPaid }) {
       hoverColor: "#7C4DFF",
     },
     {
-      value: "Checkout de pagamento",
-      label: "Checkout de pagamento",
+      value: "Checkout",
+      label: "Checkout",
       color: "#00BFA5",
       hoverColor: "#64FFDA",
     },
